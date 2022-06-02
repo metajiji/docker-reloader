@@ -1,0 +1,68 @@
+---
+
+project_name: docker-reloader
+
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+    ldflags:
+      - >-
+        -s -w
+        -X main.version={{ .Version }}
+        -X main.commit={{ .Commit }}
+        -X main.date={{ .CommitDate }}
+    tags:
+      # - osusergo
+      # - netgo
+      - static_build
+      # - feature
+
+snapshot:
+  name_template: "{{ .Version }}"
+
+dockers:
+  - use: buildx
+    skip_push: auto
+    dockerfile: Dockerfile
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - quay.io/den4k/docker-reloader:{{ .Tag }}
+      - quay.io/den4k/docker-reloader:latest
+    build_flag_templates:
+      - --pull
+      - --label=org.opencontainers.image.description=Watch file changes and execute commands inside containers
+      - --label=org.opencontainers.image.created={{ .Date }}
+      - --label=org.opencontainers.image.name={{ .ProjectName }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --label=org.opencontainers.image.source={{ .GitURL }}
+
+# Disable Scoop App Manifest
+scoop:
+  skip_upload: true
+
+# Disable announce
+announce:
+  skip: true
+
+# Disable release
+release:
+  disable: true
+
+# Disable checksum
+checksum:
+  disable: true
+
+# Disable archiving
+archives:
+  - format: binary

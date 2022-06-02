@@ -1,0 +1,21 @@
+---
+
+stages:
+  - release
+
+release:
+  stage: release
+  image:
+    name: goreleaser/goreleaser
+    entrypoint: ['']
+  variables:
+    DOCKER_REGISTRY: https://quay.io  # $CI_REGISTRY
+    DOCKER_USERNAME: $QUAY_IO_REGISTRY_LOGIN  # $CI_REGISTRY_USER
+    DOCKER_PASSWORD: $QUAY_IO_REGISTRY_TOKEN  # $CI_REGISTRY_PASSWORD
+    GIT_DEPTH: 0
+  script:
+    - printenv
+    - goreleaser release --rm-dist
+  only:
+    refs:
+      - tags
