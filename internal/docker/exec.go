@@ -95,10 +95,10 @@ func dockerExec(ctx context.Context, cli client.APIClient, id string, cmd []stri
 	return ExecResult{ExitCode: iresp.ExitCode, outBuffer: &outBuf, errBuffer: &errBuf}, nil
 }
 
-func ExecCommand(dClient client.APIClient, container string, command string) ExecResult {
+func ExecCommand(dClient client.APIClient, container string, command []string) ExecResult {
 	ctx := context.Background()
 
-	d, err := dockerExec(ctx, dClient, container, strings.Split(command, " "))
+	d, err := dockerExec(ctx, dClient, container, command)
 	if err != nil {
 		log.Printf(`Command "%s" failed in container "%s" with error: %s`, command, container, err)
 		return d

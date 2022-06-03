@@ -2,8 +2,15 @@
 
 watch:
   - path: /tmp/test/123
-    command: echo hello world
+    command:
+      - echo
+      - hello
+      - world
     container: test-container
   - path: /tmp/test/abc
-    command: echo hello world
+    command:
+      - sh
+      - -xec
+      - |-
+        echo hello world
     container: test-container

@@ -12,9 +12,9 @@ type Config struct {
 }
 
 type WatchedFile struct {
-	Path      string `yaml:"path"`
-	Command   string `yaml:"command"`
-	Container string `yaml:"container"`
+	Path      string   `yaml:"path"`
+	Command   []string `yaml:"command"`
+	Container string   `yaml:"container"`
 }
 
 func LoadConfig(path string) Config {
