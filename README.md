@@ -3,7 +3,7 @@
 ## Pull image
 
 ```bash
-docker pull quay.io/den4k/docker-reloader
+docker pull ghcr.io/metajiji/docker-reloader
 ```
 
 ## Build
@@ -11,5 +11,5 @@ docker pull quay.io/den4k/docker-reloader
 For more information [read the docs](https://goreleaser.com/quick-start/)
 
 ```bash
-goreleaser release --snapshot --rm-dist
+goreleaser release --snapshot --clean
 ```

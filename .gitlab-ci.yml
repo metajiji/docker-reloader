@@ -14,7 +14,7 @@ release:
     DOCKER_PASSWORD: $GHCR_IO_REGISTRY_TOKEN  # $CI_REGISTRY_PASSWORD
     GIT_DEPTH: 0
   script:
-    - /entrypoint.sh release --rm-dist
+    - /entrypoint.sh release --clean
   only:
     refs:
       - tags
