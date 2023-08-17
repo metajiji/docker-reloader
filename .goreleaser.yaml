@@ -36,8 +36,8 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - quay.io/den4k/docker-reloader:{{ .Tag }}
-      - quay.io/den4k/docker-reloader:latest
+      - ghcr.io/metajiji/docker-reloader:{{ .Tag }}
+      - ghcr.io/metajiji/docker-reloader:latest
     build_flag_templates:
       - --pull
       - --label=org.opencontainers.image.description=Watch file changes and execute commands inside containers

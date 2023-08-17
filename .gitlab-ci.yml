@@ -9,9 +9,9 @@ release:
     name: goreleaser/goreleaser
     entrypoint: ['']
   variables:
-    DOCKER_REGISTRY: quay.io  # $CI_REGISTRY
-    DOCKER_USERNAME: $QUAY_IO_REGISTRY_LOGIN  # $CI_REGISTRY_USER
-    DOCKER_PASSWORD: $QUAY_IO_REGISTRY_TOKEN  # $CI_REGISTRY_PASSWORD
+    DOCKER_REGISTRY: ghcr.io  # $CI_REGISTRY
+    DOCKER_USERNAME: $GHCR_IO_REGISTRY_LOGIN  # $CI_REGISTRY_USER
+    DOCKER_PASSWORD: $GHCR_IO_REGISTRY_TOKEN  # $CI_REGISTRY_PASSWORD
     GIT_DEPTH: 0
   script:
     - /entrypoint.sh release --rm-dist
